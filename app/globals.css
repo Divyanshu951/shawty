@@ -1,36 +1,342 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffede4;
-  --foreground: #1e293b;
+  /* ========================================
+     CORE
+     ======================================== */
+  --background: #fff8f1;
+  --foreground: #1e1b15;
+  --background-neutral: #ffffff;
 
-  --background-neutral: #fff;
+  /* ========================================
+     SURFACES
+     ======================================== */
+  --surface: #fff8f1;
+  --surface-dim: #e0d9cf;
+  --surface-bright: #fff8f1;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #faf2e9;
+  --surface-container: #f5ede3;
+  --surface-container-high: #efe7dd;
+  --surface-container-highest: #e9e1d8;
+  --surface-variant: #e9e1d8;
+
+  /* ========================================
+     ON-SURFACE / TEXT
+     ======================================== */
+  --on-surface: #1e1b15;
+  --on-surface-variant: #584237;
+
+  /* ========================================
+     BRAND
+     ======================================== */
   --primary: #f97316;
+  --primary-dark: #9d4300;
+  --on-primary: #ffffff;
+
+  --primary-container: #f97316;
+  --on-primary-container: #582200;
+
+  --secondary: #545f73;
+  --on-secondary: #ffffff;
+
+  --secondary-container: #d5e0f8;
+  --on-secondary-container: #586377;
+
+  --tertiary: #e5812c;
+  --on-tertiary: #ffffff;
+
+  --tertiary-container: #e5812c;
+  --on-tertiary-container: #522700;
+
+  /* ========================================
+     INVERSE
+     ======================================== */
+  --inverse-surface: #33302a;
+  --inverse-on-surface: #f7f0e6;
+  --inverse-primary: #ffb690;
+
+  /* ========================================
+     OUTLINES
+     ======================================== */
+  --outline: #8c7164;
+  --outline-variant: #e0c0b1;
+
+  /* ========================================
+     ERROR
+     ======================================== */
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  /* ========================================
+     FIXED COLORS
+     ======================================== */
+  --primary-fixed: #ffdbca;
+  --primary-fixed-dim: #ffb690;
+  --on-primary-fixed: #341100;
+  --on-primary-fixed-variant: #783200;
+
+  --secondary-fixed: #d8e3fb;
+  --secondary-fixed-dim: #bcc7de;
+  --on-secondary-fixed: #111c2d;
+  --on-secondary-fixed-variant: #3c475a;
+
+  --tertiary-fixed: #ffdcc5;
+  --tertiary-fixed-dim: #ffb783;
+  --on-tertiary-fixed: #301400;
+  --on-tertiary-fixed-variant: #713700;
+
+  /* ========================================
+     CUSTOM BRAND COLORS
+     ======================================== */
+  --vibrant-orange: #f97316;
+  --deep-slate: #1e293b;
+  --warm-surface: #fff7ed;
+  --accent-yellow: #fbbf24;
+
+  /* ========================================
+     RADIUS
+     ======================================== */
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  /* ========================================
+     CORE
+     ======================================== */
+  --background: #17120d;
+  --foreground: #f7f0e6;
+  --background-neutral: #211c16;
+
+  /* ========================================
+     SURFACES
+     ======================================== */
+  --surface: #1d1812;
+  --surface-dim: #14100c;
+  --surface-bright: #2a241d;
+  --surface-container-lowest: #14100c;
+  --surface-container-low: #19140f;
+  --surface-container: #211c16;
+  --surface-container-high: #29231c;
+  --surface-container-highest: #342d24;
+  --surface-variant: #342d24;
+
+  /* ========================================
+     ON-SURFACE / TEXT
+     ======================================== */
+  --on-surface: #f7f0e6;
+  --on-surface-variant: #cdb4a6;
+
+  /* ========================================
+     BRAND
+     ======================================== */
+  --primary: #ff8b3d;
+  --primary-dark: #ffb690;
+  --on-primary: #582200;
+
+  --primary-container: #9d4300;
+  --on-primary-container: #ffdbca;
+
+  --secondary: #bcc7de;
+  --on-secondary: #111c2d;
+
+  --secondary-container: #3c475a;
+  --on-secondary-container: #d8e3fb;
+
+  --tertiary: #ffb783;
+  --on-tertiary: #522700;
+
+  --tertiary-container: #944a00;
+  --on-tertiary-container: #ffdcc5;
+
+  /* ========================================
+     INVERSE
+     ======================================== */
+  --inverse-surface: #f7f0e6;
+  --inverse-on-surface: #33302a;
+  --inverse-primary: #9d4300;
+
+  /* ========================================
+     OUTLINES
+     ======================================== */
+  --outline: #8c7164;
+  --outline-variant: #584237;
+
+  /* ========================================
+     ERROR
+     ======================================== */
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  /* ========================================
+     CUSTOM BRAND COLORS
+     ======================================== */
+  --vibrant-orange: #ff8b3d;
+  --deep-slate: #d8e3fb;
+  --warm-surface: #231d17;
+  --accent-yellow: #fcd34d;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 @theme inline {
+  /* ========================================
+     COLORS
+     ======================================== */
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-background-neutral: var(--background-neutral);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-variant: var(--surface-variant);
+
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-on-primary: var(--on-primary);
+
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-inverse-primary: var(--inverse-primary);
+
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+
+  --color-primary-fixed: var(--primary-fixed);
+  --color-primary-fixed-dim: var(--primary-fixed-dim);
+  --color-on-primary-fixed: var(--on-primary-fixed);
+  --color-on-primary-fixed-variant: var(--on-primary-fixed-variant);
+
+  --color-secondary-fixed: var(--secondary-fixed);
+  --color-secondary-fixed-dim: var(--secondary-fixed-dim);
+  --color-on-secondary-fixed: var(--on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--on-secondary-fixed-variant);
+
+  --color-tertiary-fixed: var(--tertiary-fixed);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-tertiary-fixed: var(--on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant: var(--on-tertiary-fixed-variant);
+
+  --color-vibrant-orange: var(--vibrant-orange);
+  --color-deep-slate: var(--deep-slate);
+  --color-warm-surface: var(--warm-surface);
+  --color-accent-yellow: var(--accent-yellow);
+
+  /* ========================================
+     FONTS
+     ======================================== */
+
+  --font-bricolage: var(--font-bricolage-grotesque);
+  --font-jakarta: var(--font-plus-jakarta-sans);
+  --font-space: var(--font-space-mono);
+
+  /* These make:
+     font-headline-lg
+     font-body-md
+     font-body-sm
+     font-label-mono
+     work
+  */
+
+  --font-headline-lg: var(--font-bricolage-grotesque);
+  --font-headline-lg-mobile: var(--font-bricolage-grotesque);
+
+  --font-body-md: var(--font-plus-jakarta-sans);
+  --font-body-sm: var(--font-plus-jakarta-sans);
+
+  --font-label-mono: var(--font-space-mono);
+
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+
+  --text-display-lg: 56px;
+  --text-display-lg--line-height: 64px;
+  --text-display-lg--font-weight: 800;
+  --text-display-lg--letter-spacing: -0.04em;
+
+  --text-headline-lg: 36px;
+  --text-headline-lg--line-height: 44px;
+  --text-headline-lg--font-weight: 700;
+  --text-headline-lg--letter-spacing: -0.02em;
+
+  --text-headline-lg-mobile: 30px;
+  --text-headline-lg-mobile--line-height: 38px;
+  --text-headline-lg-mobile--font-weight: 700;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 500;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 500;
+
+  --text-label-mono: 14px;
+  --text-label-mono--line-height: 20px;
+  --text-label-mono--font-weight: 500;
+  --text-label-mono--letter-spacing: 0.01em;
+
+  /* ========================================
+     RADIUS
+     ======================================== */
+
+  --radius-sm: 0.25rem;
+  --radius: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+html {
+  background: var(--background);
 }
 
 body {
-  background-color: var(--background);
+  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
+}
+
+::selection {
+  background: var(--primary);
+  color: #ffffff;
 }
