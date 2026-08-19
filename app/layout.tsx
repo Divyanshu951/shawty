@@ -1,16 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Inter,
+  Plus_Jakarta_Sans,
+  Space_Mono,
+} from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/sidebar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  variable: "--font-plus-jakarta-san",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
+  variable: "--font-bricolage-grotesque",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
 });
 
 export const metadata: Metadata = {
@@ -22,12 +33,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${plusJakarta.variable} ${bricolageGrotesque.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="flex">
-        <Sidebar />
-        <main className="bg-background grow">{children}</main>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
