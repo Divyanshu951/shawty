@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import {
   Bricolage_Grotesque,
-  Inter,
   Plus_Jakarta_Sans,
   Space_Mono,
 } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/sidebar";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],

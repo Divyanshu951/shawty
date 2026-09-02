@@ -13,10 +13,11 @@ import {
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const navItems = [
   {
-    label: "Dashboard",
+    label: "Overview",
     icon: LayoutDashboardIcon,
     path: "dashboard",
   },
@@ -41,8 +42,8 @@ const Sidebar = () => {
   const pathName = usePathname();
 
   return (
-    <aside className="bg-surface-container-lowest border-outline-variant/50 flex h-screen w-64 flex-col space-y-2 border-r p-4 shadow-sm">
-      <div className="mb-8 flex items-center gap-4 px-4 py-6">
+    <aside className="bg-surface-container-lowest border-outline-variant/50 hidden h-screen w-64 flex-col space-y-2 border-r p-4 shadow-sm md:flex">
+      <div className="flex items-center gap-4 px-4 py-6">
         <div className="bg-surface-variant h-12 w-12 shrink-0 overflow-hidden rounded-full">
           <Image src={profile} alt="avatar" />
         </div>
@@ -55,8 +56,9 @@ const Sidebar = () => {
           </p>
         </div>
       </div>
+      <div className="border-outline-variant/30 border-t" />
 
-      <nav className="flex flex-1 flex-col gap-1">
+      <nav className="mt-2 flex flex-1 flex-col gap-1">
         {navItems.map((item) => (
           <NavItem key={item.label} item={item} pathName={pathName} />
         ))}
@@ -93,30 +95,45 @@ type NavItemTypes = {
 const NavItem = ({ item, pathName }: NavItemTypes) => {
   const { icon: Icon, label, path } = item;
 
-  console.log(path, pathName);
+  const isActive = pathName === `/${path}`;
 
   return (
     <Link
-      className={cn(
-        pathName === `/${path}`
-          ? "bg-primary text-background-neutral font-bold shadow-sm"
-          : "hover:bg-surface-variant/50 text-on-primary-container transition-colors duration-200",
-        "group flex items-center gap-3 rounded-md px-4 py-3 transition-transform",
-      )}
       href={`/${path}`}
+      className="group relative flex items-center gap-3 rounded-md px-4 py-2"
     >
-      <span className="flex items-center gap-2">
-        <Icon
-          className={cn(
-            pathName !== `/${path}` &&
-              "group-hover:text-primary-dark transition-colors duration-200",
-          )}
-          size={20}
+      {isActive && (
+        <motion.div
+          layoutId="sidebar-active-pill"
+          className="bg-primary absolute inset-0 rounded-md shadow-2xl"
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 35,
+          }}
         />
-        <span className="font-body-sm text-body-sm">{label}</span>
+      )}
+
+      <span className="relative z-10 flex items-center gap-2">
+        <Icon
+          size={20}
+          className={cn(
+            isActive
+              ? "text-background-neutral"
+              : "text-on-primary-container group-hover:text-primary-dark transition-colors duration-200",
+          )}
+        />
+
+        <span
+          className={cn(
+            "font-body-sm text-body-sm",
+            isActive ? "text-background-neutral" : "text-on-primary-container",
+          )}
+        >
+          {label}
+        </span>
       </span>
     </Link>
   );
 };
-
 export default Sidebar;
