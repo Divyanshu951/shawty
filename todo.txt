@@ -1,0 +1,3 @@
+1. Add auth 
+2. Add header and a dark mode toggle in it 
+3. Add other functionality 

@@ -1,1 +1,1 @@
-export * from "./better-auth.schema";
+export * from "./better-auth-schema";
