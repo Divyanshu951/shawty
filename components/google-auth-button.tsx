@@ -13,7 +13,7 @@ const GoogleAuthButton = () => {
     <button
       type="button"
       onClick={handleSignin}
-      className="flex cursor-pointer items-center justify-center rounded-xl border px-4 py-3 transition-colors hover:bg-neutral-200/50"
+      className="flex cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-black transition-transform duration-200 hover:-translate-y-0.5 dark:bg-white"
     >
       <span className="flex text-sm font-medium">
         <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">

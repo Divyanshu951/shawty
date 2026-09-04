@@ -14,6 +14,7 @@ import { useSession } from "@/lib/auth-client";
 import NavItem from "./nav-Item";
 import LogoutButton from "../logout-button";
 import { redirect } from "next/navigation";
+import ThemeToggle from "../theme-toggle";
 
 const navItems = [
   {
@@ -74,14 +75,11 @@ const Sidebar = () => {
       </nav>
 
       <div className="border-outline-variant/30 mt-auto space-y-4 border-t pt-4">
-        <button className="bg-primary-dark text-on-primary font-body-sm text-body-sm hover:bg-on-primary-fixed-variant w-full cursor-pointer rounded-md py-3 font-semibold shadow-sm transition-colors">
+        <button className="bg-primary-dark text-on-primary font-body-sm text-body-sm w-full cursor-pointer rounded-md py-3 font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
           Upgrade to Pro
         </button>
         <div className="space-y-1">
-          <button className="text-on-surface-variant hover:bg-surface-variant/50 flex w-full cursor-pointer items-center gap-3 rounded-md px-4 py-2 transition-colors duration-200">
-            <HelpCircle size={18} />
-            <span className="font-body-sm text-body-sm">Help Center</span>
-          </button>
+          <ThemeToggle />
           <LogoutButton />
         </div>
       </div>
