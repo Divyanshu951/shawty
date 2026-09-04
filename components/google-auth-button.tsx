@@ -17,9 +17,10 @@ const GoogleAuthButton = () => {
 
   return (
     <button
+      disabled={isLoading}
       type="button"
       onClick={handleSignin}
-      className="flex cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-black transition-transform duration-200 hover:-translate-y-0.5 dark:bg-white"
+      className="flex cursor-pointer items-center justify-center rounded-xl border px-4 py-3 text-black transition-transform duration-200 hover:-translate-y-0.5 disabled:cursor-not-allowed dark:bg-white"
     >
       {isLoading ? (
         <Loader2Icon size={18} className="animate-spin" />
