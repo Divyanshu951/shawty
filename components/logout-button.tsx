@@ -4,7 +4,7 @@ import { Loader2Icon, LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const LogoutButton = () => {
+const LogoutButton = ({ collapseMenu }: { collapseMenu: boolean }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
@@ -35,14 +35,16 @@ const LogoutButton = () => {
           ) : (
             <LogOutIcon size={18} />
           )}
-          <span
-            className={cn(
-              "font-body-sm text-body-sm",
-              isLoading && "opacity-35",
-            )}
-          >
-            Logout
-          </span>
+          {!collapseMenu && (
+            <span
+              className={cn(
+                "font-body-sm text-body-sm",
+                isLoading && "opacity-35",
+              )}
+            >
+              Logout
+            </span>
+          )}
         </div>
       </div>
     </button>

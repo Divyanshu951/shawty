@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
 type NavItemTypes = {
+  collapseMenu: boolean;
   item: {
     label: string;
     icon: LucideIcon;
@@ -12,7 +13,7 @@ type NavItemTypes = {
   };
 };
 
-const NavItem = ({ item }: NavItemTypes) => {
+const NavItem = ({ item, collapseMenu }: NavItemTypes) => {
   const pathName = usePathname();
   const { icon: Icon, label, path } = item;
   const isActive = pathName === `/${path}`;
@@ -20,7 +21,10 @@ const NavItem = ({ item }: NavItemTypes) => {
   return (
     <Link
       href={`/${path}`}
-      className="group relative flex items-center gap-3 rounded-md px-4 py-2"
+      className={cn(
+        collapseMenu && "justify-center",
+        "group relative flex items-center gap-3 rounded-md px-4 py-2",
+      )}
     >
       {isActive && (
         <motion.div
@@ -44,14 +48,18 @@ const NavItem = ({ item }: NavItemTypes) => {
           )}
         />
 
-        <span
-          className={cn(
-            "font-body-sm text-body-sm",
-            isActive ? "text-background-neutral" : "text-on-primary-container",
-          )}
-        >
-          {label}
-        </span>
+        {!collapseMenu && (
+          <span
+            className={cn(
+              "font-body-sm text-body-sm",
+              isActive
+                ? "text-background-neutral"
+                : "text-on-primary-container",
+            )}
+          >
+            {label}
+          </span>
+        )}
       </span>
     </Link>
   );

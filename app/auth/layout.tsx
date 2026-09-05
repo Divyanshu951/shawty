@@ -18,12 +18,12 @@ export default async function AppLayout({
           src="/signup-poster-3.png"
           alt="poster"
           fill
-          className="object-cover"
+          className="object-"
           priority
         />
       </div>
 
-      <main className="flex-1 md:basis-1/4">{children}</main>
+      <main className="min-w-70 flex-1 md:basis-1/4">{children}</main>
     </div>
   );
 }

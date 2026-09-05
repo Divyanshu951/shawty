@@ -2,9 +2,8 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ collapseMenu }: { collapseMenu: boolean }) => {
   const { theme, setTheme } = useTheme();
-  console.log(theme);
 
   return (
     <button
@@ -22,7 +21,9 @@ const ThemeToggle = () => {
           className="scale-0 rotate-90 transition-all duration-700 dark:scale-100 dark:rotate-0"
         />
       )}
-      <span className="font-body-sm text-body-sm">Switch Theme</span>
+      {!collapseMenu && (
+        <span className="font-body-sm text-body-sm">Switch Theme</span>
+      )}
     </button>
   );
 };
