@@ -17,11 +17,13 @@
     "drizzle-orm": "0.45.2",
     "framer-motion": "^13.1.1",
     "lucide-react": "^1.32.0",
+    "nanoid": "^6.0.1",
     "next": "16.3.1",
     "next-themes": "^0.4.6",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "tailwind-merge": "^3.6.0"
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
