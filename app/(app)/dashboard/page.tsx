@@ -1,8 +1,29 @@
 import ClickActivityChart from "@/components/click-activity-chart";
 import QuickShortenForm from "@/components/quick-shorten-form";
+import db from "@/db";
+import { urlTable } from "@/db/schemas";
+import getSession from "@/lib/get-session";
+import { eq } from "drizzle-orm";
 import { Plus, TrendingUp } from "lucide-react";
+import { redirect } from "next/navigation";
 
-const Page = () => {
+const Page = async () => {
+  const session = await getSession();
+
+  if (!session) {
+    redirect("/auth/signup");
+  }
+
+  const allUrls = await db
+    .select({ clickCount: urlTable.clickCount })
+    .from(urlTable)
+    .where(eq(urlTable.userId, session.user.id));
+
+  const totalCount = allUrls.reduce(
+    (accumulator, currentValue) => accumulator + currentValue.clickCount,
+    0,
+  );
+
   return (
     <div>
       <div className="mb-4 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
@@ -41,7 +62,7 @@ const Page = () => {
           </div>
           <div className="flex flex-1 flex-col justify-end">
             <span className="font-display-lg text-display-lg text-on-surface">
-              124.5K
+              {totalCount}
             </span>
             <p className="font-body-sm text-body-sm text-secondary mt-1 flex items-center gap-1">
               <span className="text-primary font-semibold">+14.2%</span> this
