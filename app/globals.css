@@ -213,8 +213,8 @@
   --color-primary-dark: var(--primary-dark);
   --color-on-primary: var(--on-primary);
 
-  --color-muted-foreground: var(--muted-foreground)
-    --color-primary-container: var(--primary-container);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary-container: var(--primary-container);
   --color-on-primary-container: var(--on-primary-container);
 
   --color-secondary: var(--secondary);
@@ -268,14 +268,6 @@
   --font-bricolage: var(--font-bricolage-grotesque);
   --font-jakarta: var(--font-plus-jakarta-sans);
   --font-space: var(--font-space-mono);
-
-  /* These make:
-     font-headline-lg
-     font-body-md
-     font-body-sm
-     font-label-mono
-     work
-  */
 
   --font-headline-lg: var(--font-bricolage-grotesque);
   --font-headline-lg-mobile: var(--font-bricolage-grotesque);
