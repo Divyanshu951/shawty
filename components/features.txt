@@ -1,5 +1,4 @@
-import React from "react";
-import { Gauge, BarChart3, ShieldCheck, Copy } from "lucide-react";
+import { Gauge, BarChart3, ShieldCheck, Copy, LucideIcon } from "lucide-react";
 
 const ShawtyFeaturePanel = () => {
   return (
@@ -91,7 +90,15 @@ const ShawtyFeaturePanel = () => {
   );
 };
 
-const Feature = ({ icon, title, desc }) => (
+const Feature = ({
+  icon,
+  title,
+  desc,
+}: {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}) => (
   <div className="flex items-start gap-3.5">
     <div className="text-primary mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-zinc-800 bg-zinc-950">
       {icon}
