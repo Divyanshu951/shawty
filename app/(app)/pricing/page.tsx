@@ -17,7 +17,7 @@ const Pricing = () => {
           are not active yet and will be announced before beta ends.
         </p>
       </div>
-      <div className="flex w-full gap-6">
+      <div className="flex w-full flex-col gap-6 md:flex-row">
         <div className="bg-surface-container-lowest border-outline-variant hover:shadow-level-1 group relative z-10 flex h-full flex-col rounded-xl border p-8 transition-all duration-300">
           <div className="mb-8">
             <h2 className="font-headline-lg text-headline-lg text-on-surface group-hover:text-primary mb-2 transition-colors">

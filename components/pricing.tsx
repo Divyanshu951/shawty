@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Pricing = () => {
   return (
     <main className="max-w-container-max px-margin-mobile md:px-margin-desktop relative mx-auto flex w-full flex-grow flex-col items-center overflow-hidden py-16 md:py-24">
@@ -134,9 +136,11 @@ const Pricing = () => {
               </span>
             </li>
           </ul>
-          <button className="bg-primary text-on-primary hover:bg-on-primary-fixed-variant font-label-mono text-label-mono mt-auto w-full rounded-lg py-3 transition-colors">
-            Upgrade to Pro
-          </button>
+          <Link href="/pricing">
+            <button className="bg-primary text-on-primary hover:bg-on-primary-fixed-variant font-label-mono text-label-mono mt-auto w-full rounded-lg py-3 transition-colors">
+              Upgrade to Pro
+            </button>
+          </Link>
         </div>
         <div className="bg-surface-container-lowest border-outline-variant hover:shadow-level-1 group relative z-10 flex h-full flex-col rounded-xl border p-8 transition-all duration-300">
           <div className="mb-8">

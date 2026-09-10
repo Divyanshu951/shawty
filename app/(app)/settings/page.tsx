@@ -4,6 +4,7 @@ import { urlTable } from "@/db/schemas";
 import getSession from "@/lib/get-session";
 import { count, eq } from "drizzle-orm";
 import { Sparkles, StarCheck } from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -101,12 +102,11 @@ const SettingsPage = async () => {
               <span>Unlimited clicks & QR codes included</span>
             </div>
 
-            <button
-              type="button"
-              className="font-body-sm w-full cursor-pointer rounded-lg bg-white py-3 text-sm font-bold text-[#9d4300] shadow-sm transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
-            >
-              Upgrade to Pro
-            </button>
+            <Link href="/pricing">
+              <button className="font-body-sm w-full cursor-pointer rounded-lg bg-white py-3 text-sm font-bold text-[#9d4300] shadow-sm transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0">
+                Upgrade to Pro
+              </button>
+            </Link>
           </div>
         </section>
       </div>

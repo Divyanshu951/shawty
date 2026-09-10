@@ -15,6 +15,7 @@ import LogoutButton from "../logout-button";
 import ThemeToggle from "../theme-toggle";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type SidebarProps = {
   user: User;
@@ -52,7 +53,7 @@ const Sidebar = ({ user }: SidebarProps) => {
     <aside
       className={cn(
         collapseMenu ? "w-16 p-2" : "w-64 p-4",
-        "bg-surface-container-lowest border-outline-variant/50 relative hidden h-full md:flex flex-col shrink-0 border-r shadow-sm transition-all duration-300 z-20",
+        "bg-surface-container-lowest border-outline-variant/50 relative z-20 hidden h-full shrink-0 flex-col border-r shadow-sm transition-all duration-300 md:flex",
       )}
     >
       {/* Collapse/Expand Toggle Button positioned on the border */}
@@ -88,7 +89,7 @@ const Sidebar = ({ user }: SidebarProps) => {
         </div>
         {!collapseMenu && (
           <div className="min-w-0 flex-1">
-            <h1 className="font-headline-lg text-primary-dark text-lg leading-tight font-bold truncate">
+            <h1 className="font-headline-lg text-primary-dark truncate text-lg leading-tight font-bold">
               {name ?? "Guest"}
             </h1>
             <p className="font-body-sm text-body-sm text-secondary text-xs">
@@ -101,7 +102,7 @@ const Sidebar = ({ user }: SidebarProps) => {
       <div className="border-outline-variant/30 shrink-0 border-t" />
 
       {/* Nav items (scrolls internally if viewport is small) */}
-      <nav className="mt-2 flex flex-1 flex-col gap-1 overflow-y-auto overflow-x-hidden">
+      <nav className="mt-2 flex flex-1 flex-col gap-1 overflow-x-hidden overflow-y-auto">
         {navItems.map((item) => (
           <NavItem key={item.label} item={item} collapseMenu={collapseMenu} />
         ))}
@@ -109,9 +110,11 @@ const Sidebar = ({ user }: SidebarProps) => {
 
       {/* Bottom actions */}
       <div className="border-outline-variant/30 mt-auto shrink-0 space-y-4 border-t pt-4">
-        <button className="bg-primary-dark text-on-primary font-body-sm text-body-sm flex w-full cursor-pointer items-center justify-center rounded-md py-3 font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
-          {!collapseMenu ? "Upgrade to Pro" : <CrownIcon size={18} />}
-        </button>
+        <Link href="/pricing">
+          <button className="bg-primary-dark text-on-primary font-body-sm text-body-sm flex w-full cursor-pointer items-center justify-center rounded-md py-3 font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+            {!collapseMenu ? "Upgrade to Pro" : <CrownIcon size={18} />}
+          </button>
+        </Link>
         <div className="space-y-1">
           <ThemeToggle collapseMenu={collapseMenu} />
           <LogoutButton collapseMenu={collapseMenu} />

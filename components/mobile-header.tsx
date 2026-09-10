@@ -68,7 +68,7 @@ export default function MobileHeader({ user }: MobileHeaderProps) {
       {/* Mobile Top App Bar */}
       <header className="bg-surface-container-lowest border-outline-variant/30 sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b px-4 md:hidden">
         <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="bg-primary-dark flex size-8 items-center justify-center rounded-lg text-white font-bold text-base shadow-xs">
+          <div className="bg-primary-dark flex size-8 items-center justify-center rounded-lg text-base font-bold text-white shadow-xs">
             S
           </div>
           <span className="font-headline-lg text-primary-dark text-lg font-bold">
@@ -89,7 +89,7 @@ export default function MobileHeader({ user }: MobileHeaderProps) {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-secondary hover:text-on-surface hover:bg-surface-container flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg transition-colors cursor-pointer"
+            className="text-secondary hover:text-on-surface hover:bg-surface-container flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-lg transition-colors"
             aria-label="Toggle Navigation Menu"
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -107,7 +107,7 @@ export default function MobileHeader({ user }: MobileHeaderProps) {
           />
 
           {/* Drawer Menu */}
-          <div className="bg-surface-container-lowest border-outline-variant/30 fixed top-16 right-0 bottom-0 flex w-72 max-w-[85vw] flex-col border-l p-5 shadow-2xl animate-in slide-in-from-right duration-200 overflow-y-auto">
+          <div className="bg-surface-container-lowest border-outline-variant/30 animate-in slide-in-from-right fixed top-16 right-0 bottom-0 flex w-72 max-w-[85vw] flex-col overflow-y-auto border-l p-5 shadow-2xl duration-200">
             {/* User Profile Card */}
             <div className="border-outline-variant/30 mb-4 flex items-center gap-3 border-b pb-4">
               <div className="border-outline-variant/40 relative size-10 overflow-hidden rounded-full border">
@@ -120,10 +120,10 @@ export default function MobileHeader({ user }: MobileHeaderProps) {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="font-headline-lg text-on-surface text-sm font-semibold truncate">
+                <p className="font-headline-lg text-on-surface truncate text-sm font-semibold">
                   {user.name || "User"}
                 </p>
-                <p className="font-body-sm text-secondary text-xs truncate">
+                <p className="font-body-sm text-secondary truncate text-xs">
                   {user.email}
                 </p>
               </div>
@@ -157,7 +157,9 @@ export default function MobileHeader({ user }: MobileHeaderProps) {
             <div className="border-outline-variant/30 space-y-3 border-t pt-4">
               <button className="bg-primary-dark text-on-primary font-body-sm flex w-full items-center justify-center gap-2 rounded-lg py-2.5 text-xs font-semibold shadow-xs">
                 <CrownIcon size={15} />
-                <span>Upgrade to Pro</span>
+                <span>
+                  <Link href="/pricing">Upgrade to Pro</Link>
+                </span>
               </button>
 
               <div className="flex items-center justify-between pt-1">
