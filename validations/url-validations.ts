@@ -27,4 +27,18 @@ export const createUrlSchema = z.object({
       message: "Only letters, numbers, and hyphens are accepted.",
     })
     .optional(),
+
+  expiresAt: z
+    .string()
+    .trim()
+    .refine(
+      (value) => {
+        if (!value) return true;
+        const date = new Date(value);
+        return !isNaN(date.getTime()) && date > new Date();
+      },
+      { message: "Expiry date must be in the future." },
+    )
+    .optional(),
 });
+

@@ -1,125 +1,117 @@
+import SettingsForm from "@/components/settings-form";
+import db from "@/db";
+import { urlTable } from "@/db/schemas";
 import getSession from "@/lib/get-session";
-import { Edit2, StarCheck } from "lucide-react";
-import Image from "next/image";
+import { count, eq } from "drizzle-orm";
+import { Sparkles, StarCheck } from "lucide-react";
 import { redirect } from "next/navigation";
 
-const Page = async () => {
+export const dynamic = "force-dynamic";
+
+const SettingsPage = async () => {
   const session = await getSession();
 
   if (!session) {
-    return redirect("/auth/signup");
+    return redirect("/auth/login");
   }
 
-  const { name, email, image } = session?.user;
+  // Count user's total links
+  const [linksCount] = await db
+    .select({ total: count() })
+    .from(urlTable)
+    .where(eq(urlTable.userId, session.user.id));
+
+  const totalLinks = linksCount?.total || 0;
+  const planLimit = 1000;
+  const usagePercentage = Math.min(
+    100,
+    Math.round((totalLinks / planLimit) * 100),
+  );
 
   return (
-    <div>
-      <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+    <div className="space-y-6">
+      <div className="mb-6 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 className="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">
             Account Settings
           </h2>
           <p className="font-body-sm text-body-sm text-secondary mt-1">
-            Manage your profile and billing details.{" "}
+            Manage your profile, account preferences, and usage limits.
           </p>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 md:flex-row">
-        <section className="bg-surface-container-lowest border-outline-variant/30 group w- relative grow justify-between overflow-hidden rounded-xl border p-6 shadow-[0_4px_12px_rgba(15,23,42,0.05)] md:p-8">
-          <div className="bg-surface-container/50 absolute top-0 right-0 -z-10 h-32 w-32 rounded-bl-full transition-transform duration-500 group-hover:scale-110"></div>
-          <h3 className="font-headline-lg text-on-surface border-outline-variant/30 mb-6 border-b pb-4 text-xl">
-            Profile Settings
-          </h3>
-          <div className="mb-8 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-            <div className="relative">
-              <Image
-                className="border-surface-container-high h-24 w-24 rounded-full border-2 object-cover shadow-sm"
-                alt="Avatar"
-                src={image!}
-                height={100}
-                width={100}
-              />
-              <button className="bg-primary-dark text-on-primary hover:bg-on-primary-fixed-variant absolute right-0 bottom-0 flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition-colors">
-                <span className="material-symbols-outlined text-[18px]">
-                  <Edit2 size={16} />
-                </span>
-              </button>
-            </div>
-            <div className="w-full flex-1 space-y-4">
-              <div>
-                <label className="font-label-mono text-label-mono text-secondary mb-1 block">
-                  Name
-                </label>
-                <input
-                  className="bg-surface border-outline-variant/50 focus:border-primary focus:ring-primary font-body-md text-body-md text-on-surface h-12 w-full rounded-lg border px-4 transition-all outline-none focus:ring-1"
-                  type="text"
-                  value={name}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div>
-              <label className="font-label-mono text-label-mono text-secondary mb-1 block">
-                Email Address
-              </label>
-              <input
-                className="bg-surface border-outline-variant/50 focus:border-primary focus:ring-primary font-body-md text-body-md text-on-surface h-12 w-full rounded-lg border px-4 transition-all outline-none focus:ring-1"
-                type="email"
-                value={email}
-              />
-            </div>
-            <div className="flex justify-end pt-4">
-              <button className="bg-primary-dark text-on-primary font-body-sm text-body-sm cursor-pointer rounded-md px-6 py-2.5 font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </section>
+      <div className="flex flex-col gap-6 lg:flex-row">
+        {/* Profile Settings Form */}
+        <SettingsForm user={session.user} totalLinks={totalLinks} />
 
-        <section className="relative flex w-80 flex-col justify-between overflow-hidden rounded-xl bg-[#9d4300] p-6 text-white shadow-[0_12px_24px_rgba(157,67,0,0.15)] md:p-8">
-          <div className="absolute -top-12 -right-12 h-48 w-48 rounded-full bg-white/10 blur-2xl"></div>
-          <div className="bg-on-primary-fixed/20 absolute -bottom-8 -left-8 h-32 w-32 rounded-full blur-xl"></div>
+        {/* Subscription / Plan Card */}
+        <section className="relative flex w-full flex-col justify-between overflow-hidden rounded-xl bg-[#9d4300] p-5 text-white shadow-lg sm:p-6 md:p-8 lg:w-84 lg:shrink-0">
+          <div className="pointer-events-none absolute -top-12 -right-12 h-48 w-48 rounded-full bg-white/10 blur-2xl"></div>
+          <div className="pointer-events-none absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-white/10 blur-xl"></div>
+
           <div className="relative z-10">
-            <div className="mb-2 flex items-center justify-between">
-              <span className="font-label-mono text-label-mono text-primary-fixed-dim tracking-wider uppercase">
+            <div className="mb-3 flex items-center justify-between">
+              <span className="font-label-mono text-xs tracking-wider uppercase opacity-80">
                 Current Plan
               </span>
-              <span className="material-symbols-outlined text-white/50">
+              <span className="flex size-7 items-center justify-center rounded-full bg-white/20">
                 <StarCheck size={22} />
               </span>
             </div>
-            <h3 className="font-display-lg mb-1 text-4xl font-bold">Premium</h3>
-            <p className="font-body-sm text-body-sm text-primary-fixed mb-8">
-              $29.00 / month
+
+            <h3 className="font-display-lg text-3xl font-bold">
+              Standard Free
+            </h3>
+            <p className="font-body-sm mt-1 mb-8 text-xs opacity-80">
+              Community Tier · Free forever
             </p>
-            <div className="mb-8 space-y-4">
-              <div className="mb-1 flex items-end justify-between">
-                <span className="font-label-mono text-label-mono text-primary-fixed">
-                  Links Generated
+
+            {/* Usage Progress */}
+            <div className="mb-8 space-y-3">
+              <div className="flex items-end justify-between text-xs">
+                <span className="font-label-mono opacity-90">
+                  Links Created
                 </span>
-                <span className="font-label-mono text-label-mono font-bold">
-                  8,402 / 10,000
+                <span className="font-label-mono font-bold">
+                  {totalLinks.toLocaleString()} / {planLimit.toLocaleString()}
                 </span>
               </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-black/20">
-                <div className="relative h-full w-[84%] rounded-full bg-white">
-                  <div className="absolute top-0 right-0 h-full w-2 bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"></div>
+
+              <div className="h-2 w-full overflow-hidden rounded-full bg-black/25">
+                <div
+                  className="relative h-full rounded-full bg-white transition-all duration-500"
+                  style={{ width: `${Math.max(4, usagePercentage)}%` }}
+                >
+                  <div className="absolute top-0 right-0 h-full w-2 bg-white shadow-[0_0_8px_rgba(255,255,255,0.9)]"></div>
                 </div>
               </div>
-              <p className="font-jakarta text-primary-fixed text-right text-base">
-                Resets in 12 days
+
+              <p className="font-label-mono text-right text-[11px] opacity-75">
+                {planLimit - totalLinks > 0
+                  ? `${planLimit - totalLinks} links remaining`
+                  : "Limit reached"}
               </p>
             </div>
           </div>
-          <button className="font-body-sm w-full cursor-pointer rounded-lg bg-white py-3 font-bold text-[#9d4300] shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
-            Manage Billing
-          </button>
+
+          <div className="relative z-10 space-y-2.5">
+            <div className="mb-3 flex items-center gap-2 text-xs opacity-90">
+              <Sparkles size={14} className="shrink-0 text-amber-300" />
+              <span>Unlimited clicks & QR codes included</span>
+            </div>
+
+            <button
+              type="button"
+              className="font-body-sm w-full cursor-pointer rounded-lg bg-white py-3 text-sm font-bold text-[#9d4300] shadow-sm transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Upgrade to Pro
+            </button>
+          </div>
         </section>
       </div>
     </div>
   );
 };
 
-export default Page;
+export default SettingsPage;

@@ -77,7 +77,7 @@
   --primary-fixed: #ffdbca;
   --primary-fixed-dim: #ffb690;
   --on-primary-fixed: #341100;
-  --on-primary-fixed-variant: #783200;
+  --on-primary-fixed-variant: #4c4744;
 
   --secondary-fixed: #d8e3fb;
   --secondary-fixed-dim: #bcc7de;
@@ -150,6 +150,7 @@
 
   --secondary-container: #3c475a;
   --on-secondary-container: #d8e3fb;
+  --on-primary-fixed-variant: #d3c0b6;
 
   --tertiary: #ffb783;
   --on-tertiary: #522700;

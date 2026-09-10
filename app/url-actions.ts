@@ -23,6 +23,7 @@ export async function createShortenLink(
   const validationResult = createUrlSchema.safeParse({
     destinationUrl: rawData.destinationUrl?.toString(),
     customAlias: rawData.customAlias?.toString() || undefined,
+    expiresAt: rawData.expiresAt?.toString() || undefined,
   });
 
   if (!validationResult.success) {
@@ -34,11 +35,12 @@ export async function createShortenLink(
       error:
         errors.destinationUrl?.[0] ??
         errors.customAlias?.[0] ??
+        errors.expiresAt?.[0] ??
         "Invalid input.",
     };
   }
 
-  const { destinationUrl, customAlias } = validationResult.data;
+  const { destinationUrl, customAlias, expiresAt } = validationResult.data;
 
   let slug = customAlias;
 
@@ -67,6 +69,7 @@ export async function createShortenLink(
         userId: session.user.id,
         destinationUrl,
         slug,
+        expiresAt: expiresAt ? new Date(expiresAt) : null,
       })
       .returning({
         slug: urlTable.slug,
