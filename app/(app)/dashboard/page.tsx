@@ -9,12 +9,7 @@ import db from "@/db";
 import { clicks, urlTable } from "@/db/schemas";
 import getSession from "@/lib/get-session";
 import { and, count, desc, eq, gte, inArray, sql } from "drizzle-orm";
-import {
-  BarChart3,
-  CheckCircle2,
-  Globe2,
-  TrendingUp,
-} from "lucide-react";
+import { BarChart3, CheckCircle2, Globe2, TrendingUp } from "lucide-react";
 import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -96,7 +91,10 @@ const DashboardPage = async () => {
 
     weeklyData.push({
       day: dayName,
-      dateStr: d.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      dateStr: d.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }),
       clicks: clickMap[dateKey] || 0,
       active: isToday,
     });
@@ -122,8 +120,8 @@ const DashboardPage = async () => {
           title="Total Shawties"
           value={totalLinks}
           icon={Globe2}
-          iconBgClass="bg-blue-100 dark:bg-blue-950"
-          iconColorClass="text-blue-600 dark:text-blue-400"
+          iconBgClass="bg-primary-fixed"
+          iconColorClass="text-[#9d4300]"
           subtext="created links"
         />
 
@@ -131,8 +129,8 @@ const DashboardPage = async () => {
           title="Active Links"
           value={activeLinks}
           icon={CheckCircle2}
-          iconBgClass="bg-green-100 dark:bg-green-950"
-          iconColorClass="text-green-600 dark:text-green-400"
+          iconBgClass="bg-primary-fixed"
+          iconColorClass="text-[#9d4300]"
           subtext={`${totalLinks - activeLinks} inactive`}
         />
 
@@ -140,8 +138,8 @@ const DashboardPage = async () => {
           title="Avg. Clicks / Link"
           value={avgClicksPerLink}
           icon={BarChart3}
-          iconBgClass="bg-purple-100 dark:bg-purple-950"
-          iconColorClass="text-purple-600 dark:text-purple-400"
+          iconBgClass="bg-primary-fixed"
+          iconColorClass="text-[#9d4300]"
           subtext="engagement rate"
         />
       </div>
@@ -153,7 +151,7 @@ const DashboardPage = async () => {
             <h3 className="font-headline-lg text-on-surface text-lg font-semibold">
               Quick Shorten
             </h3>
-            <p className="font-body-sm text-xs text-secondary mt-0.5">
+            <p className="font-body-sm text-secondary mt-0.5 text-xs">
               Create a quick short link in seconds.
             </p>
           </div>
