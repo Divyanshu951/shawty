@@ -110,10 +110,11 @@ const Sidebar = ({ user }: SidebarProps) => {
 
       {/* Bottom actions */}
       <div className="border-outline-variant/30 mt-auto shrink-0 space-y-4 border-t pt-4">
-        <Link href="/pricing">
-          <button className="bg-primary-dark text-on-primary font-body-sm text-body-sm flex w-full cursor-pointer items-center justify-center rounded-md py-3 font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
-            {!collapseMenu ? "Upgrade to Pro" : <CrownIcon size={18} />}
-          </button>
+        <Link
+          href="/pricing"
+          className="bg-primary-dark text-on-primary font-body-sm text-body-sm flex w-full cursor-pointer items-center justify-center rounded-md py-3 font-semibold shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
+        >
+          {!collapseMenu ? "Upgrade to Pro" : <CrownIcon size={18} />}
         </Link>
         <div className="space-y-1">
           <ThemeToggle collapseMenu={collapseMenu} />
